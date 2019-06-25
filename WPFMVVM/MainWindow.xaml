@@ -1,0 +1,35 @@
+﻿<Window x:Class="WPFMVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFMVVM"
+        xmlns:models="clr-namespace:WPFMVVM.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <models:MainPageViewModel x:Key="model"></models:MainPageViewModel>
+    </Window.Resources>
+
+    <StackPanel>
+        <GroupBox Header="MainWindow mainPageViewModel">
+            <StackPanel>
+                <Label>NameToAdd</Label>
+                <TextBox Text="{Binding NameToAdd}"></TextBox>
+                <ListBox ItemsSource="{Binding NamesList}" Height="100"></ListBox>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Window.Resources mainPageViewModel">
+            <StackPanel>
+                <Label>NameToAdd</Label>
+                <TextBox Text="{Binding Source={StaticResource model}, Path=NameToAdd}"></TextBox>
+                <ListBox ItemsSource="{Binding Source={StaticResource model}, Path=NamesList}" Height="100"></ListBox>
+            </StackPanel>
+        </GroupBox>
+
+        <Button Click="Button_Click">AddClick</Button>
+        <Button Command="{Binding Path=AddNameCommand}" CommandParameter="{Binding NamesList.Count}">AddCommand</Button>
+        
+    </StackPanel>
+</Window>
